@@ -1,0 +1,297 @@
+
+/* ============================================
+   ESTILOS GENERALES
+=============================================== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.7;
+    color: #3a3a3a;
+    background: linear-gradient(to bottom, #f4f4f4, #e9e9e9);
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.panel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   MÓDULOS Y CAJAS
+=============================================== */
+.modulo {
+    margin-bottom: 45px;
+}
+
+.caja {
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* NUEVO: acento institucional al lado izquierdo */
+    border-left: 4px solid #C6A667; /* Dorado ISSSTE */
+}
+
+/* Efecto moderno al pasar el mouse */
+.caja:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.10);
+}
+
+/* ============================================
+   TITULOS
+=============================================== */
+h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #006341; /* Verde ISSSTE */
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #A6192E; /* Rojo ISSSTE */
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #006341;
+    font-weight: 600;
+}
+
+/* ============================================
+   TEXTO
+=============================================== */
+p {
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.fecha {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   FILAS Y COLUMNAS
+=============================================== */
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 280px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #C6A667; /* Dorado ISSSTE */
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.columna:hover {
+    background: #f0f0f0;
+    /* NUEVO: ligero realce en hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* ============================================
+   HISTORIAS
+=============================================== */
+.historia {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.historia:hover {
+    border-color: #006341;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* ============================================
+   BOTONES MODERNOS
+=============================================== */
+.boton {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #006341;   /* Verde ISSSTE */
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    /* NUEVO: borde y sombra sutil */
+    border: 1px solid #005233;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.boton:hover {
+    background: #004d2c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+}
+
+/* NUEVO: estado activo y enfoque accesible */
+.boton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.boton:focus-visible {
+    outline: 3px solid #A6192E; /* Rojo ISSSTE */
+    outline-offset: 2px;
+}
+
+/* NUEVO: variante de botón secundario */
+.boton--secundario {
+    background: #e8f3ed;
+    color: #006341;
+    border-color: #bcd8c9;
+}
+
+.boton--secundario:hover {
+    background: #d7ece2;
+}
+
+/* NUEVO: enlaces internos discretos */
+.enlace-interno {
+    color: #006341;
+    font-weight: 600;
+    text-decoration: none;
+}
+.enlace-interno:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   FOOTER
+=============================================== */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVE
+=============================================== */
+@media (max-width: 768px) {
+    h1 { font-size: 30px; }
+    h2 { font-size: 24px; }
+    .caja { padding: 20px; }
+}
+``
+
+/* Botón institucional */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #6c757d;
+  background-color: #f8f9fa;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.boton:hover {
+  background-color: #e9ecef;
+  text-decoration: none;
+}
+
+/* Variación para PDF: mantiene el mismo estilo del botón */
+.btn-pdf .icon-pdf {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+/* Alinear flecha con el texto */
+.boton .texto-boton + span,
+.boton .texto-boton + i {
+  margin-left: 2px;
+}
+
+/* Accesibilidad: ocultar texto solo visualmente si se usa */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Layout general */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  padding: 16px;
+}
+
+/* Sidebar */
+.main-sidebar {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-sidebar h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.main-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-sidebar li {
+  margin-bottom: 8px;
+}
+
+.main-sidebar a {
+  text-decoration: none;
+  color: #212529;
+  font-size: 14px;
+}
+
+.main-sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Contenido principal */
+.main-content {
+  min-width: 0;
+}
+``

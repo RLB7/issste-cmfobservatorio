@@ -1,0 +1,213 @@
+/* ============================================
+   VARIABLES INSTITUCIONALES
+=============================================== */
+:root {
+    --issste-verde: #006341;
+    --issste-verde-oscuro: #004731;
+    --issste-dorado: #C3922E;
+    --gris-texto: #3a3a3a;
+}
+
+/* ============================================
+   ESTILOS GENERALES
+=============================================== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.7;
+    color: var(--gris-texto);
+    background: linear-gradient(to bottom, #f4f4f4, #e9e9e9);
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   MÓDULOS Y CAJAS
+=============================================== */
+.modulo {
+    margin-bottom: 45px;
+}
+
+.caja {
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    border-left: 4px solid var(--issste-dorado);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.caja:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.10);
+}
+
+/* ============================================
+   TITULOS
+=============================================== */
+h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: var(--issste-verde);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #A6192E;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--issste-verde);
+    font-weight: 600;
+}
+
+/* ============================================
+   TEXTO
+=============================================== */
+p {
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.fecha {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   FILAS Y COLUMNAS
+=============================================== */
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 280px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--issste-dorado);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.columna:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* ============================================
+   HISTORIAS
+=============================================== */
+.historia {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.historia:hover {
+    border-color: var(--issste-verde);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+/* ============================================
+   BOTONES
+=============================================== */
+.boton,
+.btn-primario,
+.btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+/* Botón principal */
+.btn-primario {
+    background: var(--issste-verde);
+    color: #fff;
+    border: 1px solid #005233;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn-primario:hover {
+    background: var(--issste-verde-oscuro);
+    transform: translateY(-2px);
+}
+
+/* Botón secundario */
+.btn-secundario {
+    background: var(--issste-dorado);
+    color: #fff;
+    border: 1px solid #b07c1f;
+}
+
+.btn-secundario:hover {
+    background: #b07c1f;
+}
+
+/* ============================================
+   ENLACES INTERNOS
+=============================================== */
+.enlace-interno {
+    color: var(--issste-verde);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.enlace-interno:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   TABLAS
+=============================================== */
+thead {
+    background: linear-gradient(90deg, var(--issste-verde), var(--issste-verde-oscuro));
+    color: #fff;
+}
+
+/* ============================================
+   FOOTER
+=============================================== */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVE
+=============================================== */
+@media (max-width: 768px) {
+    h1 { font-size: 30px; }
+    h2 { font-size: 24px; }
+    .caja { padding: 20px; }
+}

@@ -1,0 +1,454 @@
+
+
+<section id="control-incidencias" class="modulo">
+  <div class="caja">
+    <h2>Control de Incidencias</h2>
+    <p>Registro y seguimiento de incidencias operativas.</p>
+    <link rel="stylesheet" href="estilos.css">
+    <!-- Filtros -->
+    <div class="inc-filtros" role="region" aria-label="Filtros de incidencias">
+      <div class="filtro-item">
+        <label for="buscarIncidencia">Buscar (No, Incidencia, Asignado):</label>
+        <input type="text" id="buscarIncidencia" placeholder="Ej. red, #102, Juan Pérez" />
+      </div>
+      <div class="filtro-item">
+        <label for="filtroEstatus">Estatus:</label>
+        <select id="filtroEstatus">
+          <option value="">Todos</option>
+          <option value="Abierta">Abierta</option>
+          <option value="En progreso">En progreso</option>
+          <option value="Resuelta">Resuelta</option>
+          <option value="Cerrada">Cerrada</option>
+        </select>
+      </div>
+      <div class="filtro-item">
+        <label for="filtroPrioridad">Prioridad/Impacto:</label>
+        <select id="filtroPrioridad">
+          <option value="">Todas</option>
+          <option value="Alta">Alta</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Acciones (Exportar) -->
+    <div class="inc-acciones" role="region" aria-label="Acciones de incidencias">
+      <button type="button" class="boton" id="btnExportCsv" aria-label="Exportar incidencias visibles a CSV">
+        Exportar CSV (filtrado)
+      </button>
+      <!-- Si quieres "Exportar todo", descomenta:
+      <button type="button" class="boton btn-secundario" id="btnExportCsvTodo" aria-label="Exportar todas las incidencias a CSV">
+        Exportar todo (CSV)
+      </button>
+      -->
+    </div>
+
+    <!-- Tabla de incidencias -->
+    <div class="tabla-contenedor" role="region" aria-label="Listado de incidencias" tabindex="0">
+      <table class="tabla-incidencias" aria-describedby="tablaIncDesc">
+        <caption id="tablaIncDesc" class="sr-only">
+          Tabla de control de incidencias con columnas: No, Incidencia/Problema, Prioridad/impacto, Fecha Apertura, Creado por, Asignado a, Fecha de Resolución, Estatus.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Incidencia/Problema</th>
+            <th scope="col">Prioridad/impacto</th>
+            <th scope="col">Fecha Apertura</th>
+            <th scope="col">Creado por</th>
+            <th scope="col">Asignado a</th>
+            <th scope="col">Fecha de Resolución</th>
+            <th scope="col">Estatus</th>
+          </tr>
+        </thead>
+        <tbody id="incidenciasBody">
+          <!-- Ejemplos iniciales -->
+          <tr>
+            <td>#101</td>
+            <td>Falla en red interna del consultorio 3</td>
+            <td><span class="badge prioridad alta">Alta</span></td>
+            <td>2026-01-05</td>
+            <td>R. López</td>
+            <td>Infraestructura TI</td>
+            <td>—</td>
+            <td><span class="badge estatus abierta">Abierta</span></td>
+          </tr>
+          <tr>
+            <td>#102</td>
+            <td>Impresora de RX sin conexión</td>
+            <td><span class="badge prioridad media">Media</span></td>
+            <td>2026-01-06</td>
+            <td>J. Martínez</td>
+            <td>Soporte Técnico</td>
+            <td>2026-01-07</td>
+            <td><span class="badge estatus resuelta">Resuelta</span></td>
+          </tr>
+          <tr>
+            <td>#103</td>
+            <td>Actualización de sistema CMF Observatorio</td>
+            <td><span class="badge prioridad baja">Baja</span></td>
+            <td>2026-01-08</td>
+            <td>A. Ruiz</td>
+            <td>Sistemas</td>
+            <td>—</td>
+            <td><span class="badge estatus progreso">En progreso</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Formulario para nueva incidencia (No se autogenera) -->
+    <details class="inc-formulario">
+      <summary>Agregar nueva incidencia</summary>
+      <form id="formIncidencia" aria-label="Formulario de nueva incidencia">
+        <div class="form-grid">
+          <!-- No: solo lectura, autogenerado -->
+          <div class="form-item">
+            <label for="noIncidencia">No (auto)</label>
+            <input type="text" id="noIncidencia" placeholder="#104" readonly />
+          </div>
+          <div class="form-item">
+            <label for="descIncidencia">Incidencia/Problema</label>
+            <input type="text" id="descIncidencia" placeholder="Describa la incidencia" required />
+          </div>
+          <div class="form-item">
+            <label for="prioIncidencia">Prioridad/impacto</label>
+            <select id="prioIncidencia" required>
+              <option value="">Seleccione</option>
+              <option value="Alta">Alta</option>
+              <option value="Media">Media</option>
+              <option value="Baja">Baja</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label for="fechaApertura">Fecha Apertura</label>
+            <input type="date" id="fechaApertura" required />
+          </div>
+          <div class="form-item">
+            <label for="creadoPor">Creado por</label>
+            <input type="text" id="creadoPor" placeholder="Nombre" required />
+          </div>
+          <div class="form-item">
+            <label for="asignadoA">Asignado a</label>
+            <input type="text" id="asignadoA" placeholder="Área/Persona" required />
+          </div>
+          <div class="form-item">
+            <label for="fechaResolucion">Fecha de Resolución</label>
+            <input type="date" id="fechaResolucion" />
+          </div>
+          <div class="form-item">
+            <label for="estatusIncidencia">Estatus</label>
+            <select id="estatusIncidencia" required>
+              <option value="">Seleccione</option>
+              <option value="Abierta">Abierta</option>
+              <option value="En progreso">En progreso</option>
+              <option value="Resuelta">Resuelta</option>
+              <option value="Cerrada">Cerrada</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="boton">Guardar incidencia</button>
+          <button type="reset" class="boton btn-secundario">Limpiar</button>
+        </div>
+      </form>
+    </details>
+  </div>
+</section>
+
+<style>
+  /* ---- Estilos institucionales sobrios ---- */
+
+  /* Utilidades y accesibilidad */
+  .sr-only {
+    position: absolute !important; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+
+  /* Contenedor de filtros */
+  .inc-filtros {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 12px; border: 1px solid #e0e0e0; background: #f8f9fa; border-radius: 4px; margin: 12px 0 12px;
+  }
+  .inc-filtros .filtro-item { display: flex; flex-direction: column; gap: 6px; }
+  .inc-filtros input, .inc-filtros select {
+    padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;
+  }
+
+  /* Acciones */
+  .inc-acciones {
+    display: flex; gap: 8px; margin: 0 0 12px;
+  }
+
+  /* Tabla */
+  .tabla-contenedor { overflow: auto; border: 1px solid #e0e0e0; border-radius: 4px; }
+  .tabla-incidencias { width: 100%; border-collapse: collapse; background: #fff; }
+  .tabla-incidencias thead th {
+    background: #f1f3f5; text-align: left; font-weight: 600; font-size: 14px; color: #212529;
+    padding: 10px; border-bottom: 1px solid #e0e0e0;
+  }
+  .tabla-incidencias tbody td {
+    padding: 10px; border-top: 1px solid #f1f3f5; font-size: 14px; color: #212529;
+  }
+  .tabla-incidencias tbody tr:hover { background: #f8f9fa; }
+
+  /* Badges de prioridad y estatus */
+  .badge {
+    display: inline-block; padding: 4px 8px; border-radius: 12px;
+    font-size: 12px; line-height: 1; border: 1px solid transparent;
+  }
+  /* Prioridad */
+  .prioridad.alta { background: #fdecef; color: #7a0c1a; border-color: #f3c0c9; }
+  .prioridad.media { background: #fff3cd; color: #7a5b00; border-color: #ffe69c; }
+  .prioridad.baja { background: #e7f5ff; color: #0b5fa8; border-color: #c5e8ff; }
+
+  /* Estatus */
+  .estatus.abierta { background: #e9ecef; color: #343a40; border-color: #dee2e6; }
+  .estatus.progreso { background: #dff3ff; color: #0c5460; border-color: #bfe6ff; }
+  .estatus.resuelta { background: #e6f4ea; color: #2f6f3e; border-color: #cfe9d6; }
+  .estatus.cerrada { background: #f1f3f5; color: #495057; border-color: #e0e0e0; }
+
+  /* Formulario */
+  .inc-formulario { margin-top: 16px; }
+  .inc-formulario > summary {
+    cursor: pointer; padding: 10px 12px; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 4px; font-weight: 600;
+  }
+  .form-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px;
+  }
+  .form-item { display: flex; flex-direction: column; gap: 6px; }
+  .form-item input, .form-item select {
+    padding: 8px; border: 1px solid #ced4da; border-radius: 4px; font-size: 14px;
+  }
+  .form-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+  /* Botones */
+  .boton {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px;
+    border: 1px solid #6c757d; background-color: #f8f9fa; color: #212529;
+    font-size: 14px; font-weight: 500; text-decoration: none; border-radius: 4px; cursor: pointer;
+  }
+  .boton:hover { background-color: #e9ecef; text-decoration: none; }
+  .btn-secundario { border-color: #adb5bd; color: #343a40; background: #f8f9fa; }
+
+  /* Responsivo */
+  @media (max-width: 1024px) {
+    .form-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .inc-filtros { padding: 10px; }
+  }
+</style>
+
+<script>
+  // ----- Búsqueda, filtros, auto numeración y exportación CSV -----
+  (function() {
+    const buscarInc = document.getElementById('buscarIncidencia');
+    const filtroEst = document.getElementById('filtroEstatus');
+    const filtroPri = document.getElementById('filtroPrioridad');
+    const cuerpo = document.getElementById('incidenciasBody');
+
+    const inputNo = document.getElementById('noIncidencia');
+    const form = document.getElementById('formIncidencia');
+
+    const btnExportCsv = document.getElementById('btnExportCsv');
+    // const btnExportCsvTodo = document.getElementById('btnExportCsvTodo'); // opcional
+
+    function normalizar(str) {
+      return (str || '').toString().toLowerCase();
+    }
+
+    // Obtiene el máximo número actual en la columna No y retorna el siguiente
+    function obtenerSiguienteNo() {
+      let max = 0;
+      Array.from(cuerpo.rows).forEach(row => {
+        const valor = (row.cells[0].textContent || '').trim(); // ej: "#101"
+        const num = parseInt(valor.replace(/\D/g, ''), 10);     // -> 101
+        if (!isNaN(num) && num > max) max = num;
+      });
+      return max + 1; // siguiente
+    }
+
+    // Formatea el número al estilo "#101"
+    function formatearNo(n) {
+      return '#' + n; // Si quieres ceros: return '#' + String(n).padStart(3, '0');
+    }
+
+    // Actualiza el campo "No (auto)" en el formulario
+    function refrescarCampoNo() {
+      const siguiente = obtenerSiguienteNo();
+      inputNo.value = formatearNo(siguiente);
+    }
+
+    // Aplica filtros
+    function aplicaFiltros() {
+      const q = normalizar(buscarInc.value);
+      const est = normalizar(filtroEst.value);
+      const pri = normalizar(filtroPri.value);
+
+      Array.from(cuerpo.rows).forEach(row => {
+        const no = normalizar(row.cells[0].textContent);
+        const desc = normalizar(row.cells[1].textContent);
+        const prioridadTxt = row.cells[2].textContent.trim();
+        const prioridad = normalizar(prioridadTxt);
+        const creado = normalizar(row.cells[4].textContent);
+        const asignado = normalizar(row.cells[5].textContent);
+        const estatusTxt = row.cells[7].textContent.trim();
+        const estatus = normalizar(estatusTxt);
+
+        const coincideTexto =
+          no.includes(q) || desc.includes(q) || asignado.includes(q) || creado.includes(q);
+
+        const coincideEstatus = !est || est === estatus;
+        const coincidePrioridad = !pri || pri === prioridad;
+
+        row.style.display = (coincideTexto && coincideEstatus && coincidePrioridad) ? '' : 'none';
+      });
+    }
+
+    // ===== Exportación a CSV =====
+    function obtenerCabeceras() {
+      const ths = document.querySelectorAll('.tabla-incidencias thead th');
+      return Array.from(ths).map(th => th.textContent.trim());
+    }
+
+    function obtenerFilas(visibles = true) {
+      const rows = Array.from(cuerpo.rows);
+      return rows.filter(r => visibles ? r.style.display !== 'none' : true);
+    }
+
+    // Escapar y envolver en comillas cada campo para CSV
+    function aCsvCampo(texto) {
+      const t = (texto || '').toString().replace(/\r?\n|\r/g, ' ').trim();
+      const escapado = t.replace(/"/g, '""');
+      return `"${escapado}"`;
+    }
+
+    function construirCsv({ visibles = true, separador = ',' } = {}) {
+      const headers = obtenerCabeceras();
+      const filas = obtenerFilas(visibles);
+
+      if (filas.length === 0) {
+        return null; // sin datos
+      }
+
+      const lineas = [];
+      lineas.push(headers.map(aCsvCampo).join(separador));
+
+      filas.forEach(row => {
+        const celdas = Array.from(row.cells).map(td => aCsvCampo(td.textContent.trim()));
+        lineas.push(celdas.join(separador));
+      });
+
+      return lineas.join('\n');
+    }
+
+    function descargarCsv(contenidoCsv, nombreBase = 'incidencias') {
+      // BOM UTF-8 para Excel
+      const BOM = new Uint8Array([0xEF, 0xBB, 0xBF]);
+      const blob = new Blob([BOM, contenidoCsv], { type: 'text/csv;charset=utf-8;' });
+
+      const ahora = new Date();
+      const yyyy = ahora.getFullYear();
+      const mm = String(ahora.getMonth() + 1).padStart(2, '0');
+      const dd = String(ahora.getDate()).padStart(2, '0');
+      const hh = String(ahora.getHours()).padStart(2, '0');
+      const mi = String(ahora.getMinutes()).padStart(2, '0');
+
+      const nombre = `${nombreBase}_${yyyy}-${mm}-${dd}_${hh}${mi}.csv`;
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = nombre;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Botón: exporta lo filtrado/visible
+    btnExportCsv.addEventListener('click', () => {
+      const csv = construirCsv({ visibles: true, separador: ',' }); // usa ';' si lo prefieres
+      if (!csv) {
+        alert('No hay incidencias visibles para exportar.');
+        return;
+      }
+      descargarCsv(csv, 'incidencias_filtrado');
+    });
+
+    // (Opcional) Exportar todo
+    // if (btnExportCsvTodo) {
+    //   btnExportCsvTodo.addEventListener('click', () => {
+    //     const csv = construirCsv({ visibles: false, separador: ',' });
+    //     if (!csv) {
+    //       alert('No hay incidencias para exportar.');
+    //       return;
+    //     }
+    //     descargarCsv(csv, 'incidencias_todo');
+    //   });
+    // }
+
+    // Inicializa el valor del No en el formulario al cargar
+    refrescarCampoNo();
+
+    // Eventos de filtros
+    buscarInc.addEventListener('input', aplicaFiltros);
+    filtroEst.addEventListener('change', aplicaFiltros);
+    filtroPri.addEventListener('change', aplicaFiltros);
+
+    // Alta de nueva incidencia (No autogenerado)
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const noAuto = inputNo.value.trim(); // ya viene formateado
+      const desc = document.getElementById('descIncidencia').value.trim();
+      const prio = document.getElementById('prioIncidencia').value;
+      const apertura = document.getElementById('fechaApertura').value;
+      const creadoPor = document.getElementById('creadoPor').value.trim();
+      const asignadoA = document.getElementById('asignadoA').value.trim();
+      const resol = document.getElementById('fechaResolucion').value;
+      const estatus = document.getElementById('estatusIncidencia').value;
+
+      if (!noAuto || !desc || !prio || !apertura || !creadoPor || !asignadoA || !estatus) {
+        alert('Por favor, completa los campos obligatorios.');
+        return;
+      }
+
+      // Clase para prioridad y estatus
+      const clsPrio = prio.toLowerCase(); // alta, media, baja
+      const clsEst =
+        estatus === 'Abierta' ? 'abierta' :
+        estatus === 'En progreso' ? 'progreso' :
+        estatus === 'Resuelta' ? 'resuelta' : 'cerrada';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${noAuto}</td>
+        <td>${desc}</td>
+        <td><span class="badge prioridad ${clsPrio}">${prio}</span></td>
+        <td>${apertura}</td>
+        <td>${creadoPor}</td>
+        <td>${asignadoA}</td>
+        <td>${resol || '—'}</td>
+        <td><span class="badge estatus ${clsEst}">${estatus}</span></td>
+      `;
+      cuerpo.prepend(tr); // agrega al inicio
+
+      form.reset();
+      alert('Incidencia registrada correctamente.');
+
+      // Actualiza el número siguiente
+      refrescarCampoNo();
+    });
+
+    // Al resetear el formulario, refresca el No
+    form.addEventListener('reset', () => {
+      setTimeout(refrescarCampoNo, 0);
+    });
+  })();
+</script>
